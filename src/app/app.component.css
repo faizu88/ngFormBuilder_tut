@@ -1,0 +1,53 @@
+
+#fb-template {
+/ / display: none;
+}
+
+.template-textarea-wrap {
+  display: block !important;
+}
+
+.content {
+  margin: auto;
+  width: 100%;
+  max-width: 1280px;
+  padding-top: 5em;
+}
+
+.form-rendered .build-wrap {
+  display: none;
+}
+
+.render-wrap {
+  display: none;
+}
+
+.form-rendered .render-wrap {
+  display: block;
+}
+
+#edit-form {
+  display: none;
+  float: right;
+}
+
+.form-rendered #edit-form {
+  display: block;
+}
+
+
+hr.style-eight {
+  overflow: visible; /* For IE */
+  padding: 0;
+  border: none;
+  border-top: medium double #333;
+  color: #333;
+  text-align: center;
+}
+
+hr{
+  border: 0;
+  height: 1px;
+  background: #333;
+  background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}

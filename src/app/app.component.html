@@ -1,0 +1,47 @@
+<div>
+  <div id="stage1" class="build-wrap" style="padding: 100px;"></div>
+</div>
+<button (click)="formOnSave();">Save</button><br>
+<hr>
+
+<div *ngIf="showForm">
+  <form novalidate (ngSubmit)="onSubmit(form.value)" [formGroup]="form">
+    <div *ngFor="let prop of dynamicData">
+
+      <label [attr.for]="prop">{{prop.label}}</label>
+      <div [ngSwitch]="prop.type">
+
+        <input *ngSwitchCase="'text'"
+               [formControlName]="prop.key"
+               [id]="prop.key" [type]="prop.type">
+
+        <div *ngSwitchCase="'checkbox-group'">
+          <div *ngFor="let control of form.get(prop.key).controls;let i=index">
+            {{prop.values[i]?.label}}<input type="checkbox" value="value-1" [formControl]="control">
+          </div>
+        </div>
+
+        <div *ngSwitchCase="'select'">
+          <select [formControlName]="prop.key">
+            <option *ngFor="let option of prop.values" [value]="option.value">
+              {{option.label}}
+            </option>
+          </select>
+        </div>
+
+      </div>
+      <div class="error" *ngIf="form.get(prop.key).invalid && (form.get(prop.key).dirty || form.get(prop.key).touched)">
+        <div *ngIf="form.get(prop.key).errors.required">
+          {{ prop.label }} is required.
+        </div>
+        <div *ngIf="form.get(prop.key).errors.checkboxNotCheckedErr">
+          Atlease one checkbox should be checked.
+        </div>
+      </div>
+    </div>
+  </form>
+  <hr/>
+  <strong>Form is valid:</strong> {{form.valid}} <br>
+  <strong>Form Value</strong>
+  <pre>{{ form.value | json }}</pre>
+</div>
